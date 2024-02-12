@@ -1,5 +1,4 @@
 module github.com/de-marauder/gojson
-
 //old: module gojson
 
 go 1.21.1
