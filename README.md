@@ -1,7 +1,7 @@
-# go-json
+# gojson
 
 ## Introduction
-This package expose a `MustParse` function which can be used to parse a JSON encoding to an appropriate go data structure.
+This package exposes a `MustParse` function which can be used to parse a JSON encoding to an appropriate go data structure.
 
 It maps: 
 - JSON strings to strings
@@ -38,3 +38,7 @@ func main () {
 }
 
 ```
+
+## Author
+- [twitter](x.com/De_marauder)
+- [linkedin](linkedin.com/in/obiajulu-ezike)
