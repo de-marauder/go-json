@@ -1,1 +1,0 @@
-package gojson_test

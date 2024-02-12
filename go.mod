@@ -1,4 +1,4 @@
-module github.com/de-marauder/gojson
+module go-json
 
 //old: module gojson
 
