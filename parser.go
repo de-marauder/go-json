@@ -31,20 +31,14 @@ func (p *parser) parse() JsonValue {
 }
 
 func (p *parser) parseFromToken(token token) JsonValue {
-	fmt.Println("Parsing from token => ", token)
 	switch token.tokenType {
 	case STRING, NUMBER, NULL, BOOLEAN:
-		fmt.Println("Parsing from token regular type=> ", token)
 		return token.value
 	case LEFT_BRACE:
-		fmt.Println("Parsing from token object type=> ", token)
 		return p.parseObject()
 	case LEFT_BRACKET:
-		fmt.Println("Parsing from token array type=> ", token)
 		return p.parseArray()
 	default:
-		fmt.Println("tokens = ", p.tokens)
-		fmt.Println("current token = ", p.current, p.tokens[p.current])
 		logErrorAndFail(CustomError{fmt.Sprintf("Invalid token %v\n", token)})
 	}
 	return ""
@@ -79,8 +73,6 @@ func (p *parser) parseObject() JsonObject {
 func (p *parser) parseArray() JsonArray {
 	a := []JsonValue{}
 	value := p.advance()
-	fmt.Println("previous value", fmt.Sprintln(value))
-	fmt.Println("Initial value", fmt.Sprintln(p.peek().value))
 	for value.tokenType != RIGHT_BRACKET {
 
 		if value.tokenType == EOF {
@@ -88,10 +80,6 @@ func (p *parser) parseArray() JsonArray {
 		}
 
 		a = append(a, p.parseFromToken(value))
-		fmt.Println("current => ", p.current)
-		fmt.Println("tokens => ", p.tokens)
-		fmt.Println("token => ", p.tokens[p.current])
-		fmt.Println("tokenType => ", p.peek().tokenType)
 		p.consumeCommaUnless(RIGHT_BRACKET, fmt.Sprintln("Entries must be separated by ',' unless end of array ']' is reached"))
 		value = p.advance()
 	}
