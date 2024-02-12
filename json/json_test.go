@@ -6,7 +6,7 @@ import (
 	
 	"github.com/stretchr/testify/assert"
 	
-	"github.com/de-marauder/gojson"
+	gojson "github.com/de-marauder/gojson/json"
 )
 
 type tesctCase1 []struct {
