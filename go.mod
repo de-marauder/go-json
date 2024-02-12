@@ -1,4 +1,4 @@
-module go-json
+module gojson
 
 //old: module gojson
 
