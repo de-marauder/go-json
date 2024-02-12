@@ -1,4 +1,4 @@
-package json
+package gojson
 
 func isDigit(b byte) bool {
 	// ASCII [0-9]

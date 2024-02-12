@@ -1,11 +1,12 @@
-package json_test
+package gojson_test
 
 import (
 	"fmt"
-	"json"
 	"testing"
-
+	
 	"github.com/stretchr/testify/assert"
+	
+	"gojson"
 )
 
 type tesctCase1 []struct {
@@ -30,7 +31,7 @@ func TestMustParse(t *testing.T) {
 	for _, tc := range test1 {
 		t.Run(tc.name, func(t *testing.T) {
 			assert := assert.New(t)
-			got := json.MustParse(tc.jsonStr)
+			got := gojson.MustParse(tc.jsonStr)
 			assert.Equal(tc.expect, got, fmt.Sprintf("Expected %v got %v", tc.expect, got))
 
 		})
@@ -40,17 +41,17 @@ func TestMustParse(t *testing.T) {
 var test2 = tesctCase1{
 	{
 		name: "can parse object with one key string and value string pair",
-		expect: json.JsonObject{
+		expect: gojson.JsonObject{
 			"name": "value",
 		},
 		jsonStr: "{\"name\": \"value\"}",
 	},
 	{
 		name: "can parse complex object",
-		expect: json.JsonObject{
+		expect: gojson.JsonObject{
 			"name":   "value",
-			"arrKey": json.JsonArray{"a", 3, "w"},
-			"objKey": json.JsonObject{
+			"arrKey": gojson.JsonArray{"a", 3, "w"},
+			"objKey": gojson.JsonObject{
 				"nested key": "nested value",
 			},
 		},
@@ -62,18 +63,18 @@ func TestMustParse_simpleObject(t *testing.T) {
 	tc := test2[0]
 	t.Run(tc.name, func(t *testing.T) {
 		assert := assert.New(t)
-		got := json.MustParse(tc.jsonStr)
-		assert.Equal(tc.expect.(json.JsonObject)["name"], got.(json.JsonObject)["name"], fmt.Sprintf("Expected %v got %v", tc.expect, got))
+		got := gojson.MustParse(tc.jsonStr)
+		assert.Equal(tc.expect.(gojson.JsonObject)["name"], got.(gojson.JsonObject)["name"], fmt.Sprintf("Expected %v got %v", tc.expect, got))
 	})
 }
 func TestMustParse_complexObject(t *testing.T) {
 	tc := test2[1]
 	t.Run(tc.name, func(t *testing.T) {
 		assert := assert.New(t)
-		got := json.MustParse(tc.jsonStr).(json.JsonObject)
-		assert.Equal(tc.expect.(json.JsonObject)["name"], got["name"], fmt.Sprintf("Expected %v got %v", tc.expect, got))
-		assert.Equal(tc.expect.(json.JsonObject)["arrKey"].(json.JsonArray)[0], got["arrKey"].(json.JsonArray)[0], fmt.Sprintf("Expected %v got %v", tc.expect, got))
-		assert.Equal(tc.expect.(json.JsonObject)["objKey"], got["objKey"], fmt.Sprintf("Expected %v got %v", tc.expect, got))
+		got := gojson.MustParse(tc.jsonStr).(gojson.JsonObject)
+		assert.Equal(tc.expect.(gojson.JsonObject)["name"], got["name"], fmt.Sprintf("Expected %v got %v", tc.expect, got))
+		assert.Equal(tc.expect.(gojson.JsonObject)["arrKey"].(gojson.JsonArray)[0], got["arrKey"].(gojson.JsonArray)[0], fmt.Sprintf("Expected %v got %v", tc.expect, got))
+		assert.Equal(tc.expect.(gojson.JsonObject)["objKey"], got["objKey"], fmt.Sprintf("Expected %v got %v", tc.expect, got))
 	})
 }
 
@@ -95,10 +96,10 @@ var test3 = tesctCase1{
 	},
 	{
 		name: "can parse  complex array ",
-		expect: json.JsonArray{1, json.JsonObject{
+		expect: gojson.JsonArray{1, gojson.JsonObject{
 			"name":   "value",
-			"arrKey": json.JsonArray{"a", 3, "w"},
-			"objKey": json.JsonObject{
+			"arrKey": gojson.JsonArray{"a", 3, "w"},
+			"objKey": gojson.JsonObject{
 				"nested key": "nested value",
 			},
 		}, 3},
@@ -111,7 +112,7 @@ func TestMustParse_emptyArray(t *testing.T) {
 	t.Run(tc.name, func(t *testing.T) {
 		assert := assert.New(t)
 
-		got := json.MustParse(tc.jsonStr).(json.JsonArray)
+		got := gojson.MustParse(tc.jsonStr).(gojson.JsonArray)
 
 		assert.Equal(0, len(got), fmt.Sprintf("Expected %v got %v", tc.expect, got))
 	})
@@ -122,7 +123,7 @@ func TestMustParse_array(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			assert := assert.New(t)
 
-			got := json.MustParse(tc.jsonStr).(json.JsonArray)
+			got := gojson.MustParse(tc.jsonStr).(gojson.JsonArray)
 
 			assert.Equal(tc.expect.([]int)[0], got[0], fmt.Sprintf("Expected %v got %v", tc.expect, got))
 			assert.Equal(len(tc.expect.([]int)), len(got), fmt.Sprintf("Expected %v got %v", tc.expect, got))
@@ -138,10 +139,10 @@ func TestMustParse_complexArray(t *testing.T) {
 	t.Run(tc.name, func(t *testing.T) {
 		assert := assert.New(t)
 
-		got := json.MustParse(tc.jsonStr).(json.JsonArray)[1].(json.JsonObject)
+		got := gojson.MustParse(tc.jsonStr).(gojson.JsonArray)[1].(gojson.JsonObject)
 
-		assert.Equal(tc.expect.(json.JsonArray)[1].(json.JsonObject)["name"], got["name"], fmt.Sprintf("Expected %v got %v", tc.expect, got))
-		assert.Equal(tc.expect.(json.JsonArray)[1].(json.JsonObject)["arrKey"].(json.JsonArray)[0], got["arrKey"].(json.JsonArray)[0], fmt.Sprintf("Expected %v got %v", tc.expect, got))
-		assert.Equal(tc.expect.(json.JsonArray)[1].(json.JsonObject)["objKey"], got["objKey"], fmt.Sprintf("Expected %v got %v", tc.expect, got))
+		assert.Equal(tc.expect.(gojson.JsonArray)[1].(gojson.JsonObject)["name"], got["name"], fmt.Sprintf("Expected %v got %v", tc.expect, got))
+		assert.Equal(tc.expect.(gojson.JsonArray)[1].(gojson.JsonObject)["arrKey"].(gojson.JsonArray)[0], got["arrKey"].(gojson.JsonArray)[0], fmt.Sprintf("Expected %v got %v", tc.expect, got))
+		assert.Equal(tc.expect.(gojson.JsonArray)[1].(gojson.JsonObject)["objKey"], got["objKey"], fmt.Sprintf("Expected %v got %v", tc.expect, got))
 	})
 }

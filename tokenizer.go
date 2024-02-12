@@ -1,4 +1,4 @@
-package json
+package gojson
 
 type tokenType int
 

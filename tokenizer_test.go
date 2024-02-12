@@ -1,2 +1,1 @@
-package json_test
-
+package gojson_test

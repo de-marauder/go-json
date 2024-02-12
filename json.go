@@ -1,4 +1,4 @@
-package json
+package gojson
 
 type JsonValue any
 type JsonObject map[string]JsonValue
