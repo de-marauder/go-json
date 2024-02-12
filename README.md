@@ -26,7 +26,7 @@ package main
 import (
   "fmt"
 
-  json "github.com/de-marauder/go-json"
+  json "github.com/de-marauder/gojson/gojson"
 ) 
 
 func main () {
