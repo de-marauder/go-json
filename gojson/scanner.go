@@ -112,10 +112,14 @@ func (s *scanner) peekNext() byte {
 }
 
 func (s *scanner) addString() {
-	s.advance()
+	s1 := fmt.Sprintln(s.peek(),  string(s.peek()), s.current)
+	// s.advance()
+	s2 := fmt.Sprintln(s.peekNext(), string(s.peekNext()))
+	s3 := fmt.Sprintln(s.source[:],  string(s.peek()))
+	s4 := fmt.Sprintln(s.current)
 	for string(s.peek()) != "\"" {
 		if s.isAtEnd() {
-			logErrorAndFail(CustomError{fmt.Sprint("Unterminated string at line ", (s.line))})
+			logErrorAndFail(CustomError{fmt.Sprint("Unterminated string at line ", (s.line), " of JSON input\n", s1, s2, s3, s4)})
 		}
 
 		s.advance()
