@@ -32,7 +32,7 @@ func (p *parser) parse() JsonValue {
 
 func (p *parser) parseFromToken(token token) JsonValue {
 	switch token.tokenType {
-	case STRING, NUMBER, NULL, BOOLEAN:
+	case STRING, NUMBER, NULL, BOOLEAN, EOF:
 		return token.value
 	case LEFT_BRACE:
 		return p.parseObject()

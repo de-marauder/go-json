@@ -23,6 +23,7 @@ var test1 = tesctCase1{
 	{name: "Can parse multiple letters", expect: "abvuwjdskmd", jsonStr: "abvuwjdskmd"},
 	{name: "Can parse complex string", expect: "vdsew'cdswc\n\rcawdwq:-2143vfssxw", jsonStr: "\"vdsew'cdswc\n\rcawdwq:-2143vfssxw\""},
 	{name: "Can parse null", expect: nil, jsonStr: "null"},
+	{name: "Can parse empty", expect: nil, jsonStr: ""},
 	{name: "Can parse boolean true", expect: true, jsonStr: "true"},
 	{name: "Can parse boolean false", expect: false, jsonStr: "false"},
 }
