@@ -20,6 +20,6 @@ func NewError(message string) error {
 
 func logErrorAndFail(err error) {
 	if err != nil {
-		log.Fatalln(err)
+		log.Panicln(err)
 	}
 }
